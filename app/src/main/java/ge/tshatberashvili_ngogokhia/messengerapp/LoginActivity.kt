@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, ProfileActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                         finish()
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, ProfileActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             finish()

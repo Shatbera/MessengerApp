@@ -67,4 +67,6 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.database.ktx)
     implementation(libs.firebase.storage.ktx)
+
+    implementation(libs.glide)
 }
