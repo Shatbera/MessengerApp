@@ -19,5 +19,11 @@
     <color name="gray2">#CAD4F2</color>
     <color name="blue2">#FFF4F6FF</color>
 
+    <color name="text_primary">#1A1A1A</color>
+    <color name="dark_blue">#0D47A1</color>
+    <color name="msg_bubble_received_bg">#E0F2F1</color>
+    <color name="msg_bubble_sent_bg">#D0E8FF</color>
+    <color name="light_blue">#004C8C</color>
+
 
 </resources>
