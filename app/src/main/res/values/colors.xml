@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="buttonBlue">#3D64FF</color>
+    <color name="editTextBackground">#F4F5FA</color>
+    <color name="textHint">#999999</color>
+    <color name="textPrimary">#333333</color>
+    <color name="textCaption">#999999</color>
+
+
 </resources>

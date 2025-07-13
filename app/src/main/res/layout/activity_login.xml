@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="24dp">
+
+    <!-- Avatar Image -->
+    <ImageView
+        android:id="@+id/ivAvatar"
+        style="@style/AvatarImage"
+        android:src="@drawable/avatar_image_placeholder"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Nickname -->
+    <EditText
+        android:id="@+id/etNickname"
+        style="@style/EditTextStyle"
+        android:hint="Enter your nickname"
+        app:layout_constraintTop_toBottomOf="@id/ivAvatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Password -->
+    <EditText
+        android:id="@+id/etPassword"
+        style="@style/EditTextStyle"
+        android:hint="Enter your password"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/etNickname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Sign In button -->
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/ButtonSolid"
+        android:text="SIGN IN"
+        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Bottom container for caption and Sign Up button -->
+    <LinearLayout
+        android:id="@+id/bottomGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:id="@+id/tvNotRegistered"
+            style="@style/TextCaption"
+            android:text="Not registered?"/>
+
+        <Button
+            android:id="@+id/btnGoToRegister"
+            style="@style/ButtonOutline"
+            android:text="SIGN UP"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
