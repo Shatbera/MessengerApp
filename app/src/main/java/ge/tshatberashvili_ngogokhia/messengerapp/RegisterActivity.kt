@@ -44,8 +44,8 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val uid = auth.currentUser?.uid
                         val userMap = mapOf(
-                            "nickname" to nickname,
-                            "profession" to profession
+                            "displayName" to nickname,
+                            "occupation" to profession
                         )
                         FirebaseDatabase.getInstance()
                             .getReference("users")

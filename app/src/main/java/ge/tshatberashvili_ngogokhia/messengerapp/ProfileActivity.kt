@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import ge.tshatberashvili_ngogokhia.messengerapp.databinding.ActivityProfileBinding
+import ge.tshatberashvili_ngogokhia.messengerapp.search.SearchActivity
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -40,6 +41,11 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.ivProfile.setOnClickListener {
             openGallery()
+        }
+
+        binding.btnSearch.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
         }
     }
 

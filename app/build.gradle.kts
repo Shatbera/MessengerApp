@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.database.ktx)
     implementation(libs.firebase.storage.ktx)
+    implementation("io.github.reactivecircus.flowbinding:flowbinding-android:1.2.0")
 
     implementation(libs.glide)
 }
