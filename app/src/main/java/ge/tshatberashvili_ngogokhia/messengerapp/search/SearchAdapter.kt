@@ -9,7 +9,7 @@ import ge.tshatberashvili_ngogokhia.messengerapp.R
 import ge.tshatberashvili_ngogokhia.messengerapp.User
 import ge.tshatberashvili_ngogokhia.messengerapp.databinding.ProfileBasicBinding
 
-class SearchAdapter(private val onUserClick: (userId: String) -> Unit) :
+    class SearchAdapter(private val onUserClick: (User) -> Unit) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     private val users = mutableListOf<User>()
@@ -24,7 +24,7 @@ class SearchAdapter(private val onUserClick: (userId: String) -> Unit) :
 
         fun bind(user: User) {
             binding.root.setOnClickListener {
-                user.userId?.let { onUserClick(it) }
+                user.userId?.let { onUserClick(user) }
             }
 
             if (user.avatar != null) {

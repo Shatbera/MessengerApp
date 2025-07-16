@@ -1,5 +1,6 @@
 package ge.tshatberashvili_ngogokhia.messengerapp.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.google.firebase.database.database
+import ge.tshatberashvili_ngogokhia.messengerapp.conversation.ConversationActivity
 import ge.tshatberashvili_ngogokhia.messengerapp.data.repo.LookupRepository
 import ge.tshatberashvili_ngogokhia.messengerapp.databinding.ActivitySearchBinding
 import kotlinx.coroutines.FlowPreview
@@ -36,15 +37,20 @@ class SearchActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val users = LookupRepository.getUsers(null, null, 50)
-                .filter { it.userId != currentUserId } // Filter out current user
+                .filter { it.userId != currentUserId }
             Log.d("SearchActivity", "Found ${users.size} users (excluding self)")
             users.forEach { user ->
                 Log.d("SearchActivity", "User: ${user.nickname} - ${user.profession}")
             }
         }
 
-        val adapter = SearchAdapter { /* TODO: open conversation */ }
         val layoutManager = LinearLayoutManager(this)
+
+        val adapter = SearchAdapter { user ->
+            val intent = Intent(this, ConversationActivity::class.java)
+            intent.putExtra(ConversationActivity.EXTRA_USER_ID, user.userId)
+            startActivity(intent)
+        }
 
         binding.listUsers.layoutManager = layoutManager
         binding.listUsers.adapter = adapter
@@ -62,7 +68,7 @@ class SearchActivity : AppCompatActivity() {
                         val query = binding.searchBar.text.toString()
                         val lastUser = adapter.getLastUser()?.nickname ?: return@launch
                         val moreUsers = searchViewModel.loadMore(query, lastUser)
-                            .filter { it.userId != currentUserId } // Filter out current user
+                            .filter { it.userId != currentUserId }
                         adapter.addUsers(moreUsers)
                     }
                 }
@@ -76,7 +82,7 @@ class SearchActivity : AppCompatActivity() {
             .onEach {
                 adapter.clearUsers()
                 val users = searchViewModel.loadData(it.toString())
-                    .filter { user -> user.userId != currentUserId } // Filter out current user
+                    .filter { user -> user.userId != currentUserId }
                 adapter.addUsers(users)
             }
             .launchIn(lifecycleScope)

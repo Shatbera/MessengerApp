@@ -5,4 +5,10 @@
     <string name="back_button">Back button</string>
     <string name="search">Search</string>
 
+    <!-- New strings needed for conversation layout -->
+    <string name="message">Type a message...</string>
+    <string name="send_message">Send message</string>
+    <string name="user_avatar">User avatar</string>
+
+    <string name="error">Error</string>
 </resources>
