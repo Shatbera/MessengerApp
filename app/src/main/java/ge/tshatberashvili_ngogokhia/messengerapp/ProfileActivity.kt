@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -47,6 +48,18 @@ class ProfileActivity : AppCompatActivity() {
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
+
+        val navHome = findViewById<ImageView>(R.id.nav_home)
+
+        navHome.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+        binding.root.findViewById<ImageView>(R.id.nav_add).setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
+        }
+
     }
 
     private fun loadUserProfile() {

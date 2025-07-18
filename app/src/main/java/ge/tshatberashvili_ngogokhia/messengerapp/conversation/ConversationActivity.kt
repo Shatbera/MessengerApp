@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import ge.tshatberashvili_ngogokhia.messengerapp.ProfileActivity
+import ge.tshatberashvili_ngogokhia.messengerapp.MainActivity
 import ge.tshatberashvili_ngogokhia.messengerapp.R
 import ge.tshatberashvili_ngogokhia.messengerapp.databinding.ActivityConversationBinding
 
@@ -50,7 +50,7 @@ class ConversationActivity : AppCompatActivity() {
         }
 
         binding.backButton.setOnClickListener {
-            navigateToProfile()
+            navigateToHome()
         }
 
         viewModel.startConversation(userId)
@@ -59,8 +59,8 @@ class ConversationActivity : AppCompatActivity() {
 
     }
 
-    private fun navigateToProfile() {
-        val intent = Intent(this, ProfileActivity::class.java)
+    private fun navigateToHome() {
+        val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
