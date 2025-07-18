@@ -8,11 +8,14 @@ import com.bumptech.glide.Glide
 import ge.tshatberashvili_ngogokhia.messengerapp.databinding.ItemChatPreviewBinding
 
 class ChatPreviewAdapter(
-    private val chatPreviews: List<ChatPreview>,
+    private val originalList: List<ChatPreview>,
     private val onItemClick: (ChatPreview) -> Unit
 ) : RecyclerView.Adapter<ChatPreviewAdapter.ChatViewHolder>() {
 
-    inner class ChatViewHolder(val binding: ItemChatPreviewBinding) : RecyclerView.ViewHolder(binding.root)
+    private var displayedList: List<ChatPreview> = originalList
+
+    inner class ChatViewHolder(val binding: ItemChatPreviewBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         val binding = ItemChatPreviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -20,7 +23,7 @@ class ChatPreviewAdapter(
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        val preview = chatPreviews[position]
+        val preview = displayedList[position]
         val user = preview.user
 
         holder.binding.tvNickname.text = user.nickname
@@ -40,5 +43,15 @@ class ChatPreviewAdapter(
         }
     }
 
-    override fun getItemCount(): Int = chatPreviews.size
+    override fun getItemCount(): Int = displayedList.size
+
+    fun updateList(filtered: List<ChatPreview>) {
+        displayedList = filtered
+        notifyDataSetChanged()
+    }
+
+    fun resetList() {
+        displayedList = originalList
+        notifyDataSetChanged()
+    }
 }

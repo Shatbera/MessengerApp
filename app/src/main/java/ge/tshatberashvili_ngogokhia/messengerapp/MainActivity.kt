@@ -3,6 +3,8 @@ package ge.tshatberashvili_ngogokhia.messengerapp
 import ChatPreview
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
 
     private lateinit var adapter: ChatPreviewAdapter
-    private val userList = mutableListOf<ChatPreview>()
+    private val allUsers = mutableListOf<ChatPreview>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
-        adapter = ChatPreviewAdapter(userList) { preview ->
+        adapter = ChatPreviewAdapter(allUsers) { preview ->
             val userId = preview.user.userId
             if (!userId.isNullOrEmpty()) {
                 val intent = Intent(this, ConversationActivity::class.java)
@@ -52,6 +54,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SearchActivity::class.java))
         }
 
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val query = s.toString().trim().lowercase()
+                val filtered = allUsers.filter {
+                    it.user.nickname?.lowercase()?.contains(query) == true
+                }
+                adapter.updateList(filtered)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
 
         loadUsersWithLastMessages()
     }
@@ -60,8 +74,8 @@ class MainActivity : AppCompatActivity() {
         val currentUid = auth.currentUser?.uid ?: return
 
         binding.progressBar.visibility = android.view.View.VISIBLE
-        userList.clear()
-        adapter.notifyDataSetChanged()
+        allUsers.clear()
+        adapter.updateList(allUsers)
 
         database.getReference("users").get().addOnSuccessListener { snapshot ->
             val children = snapshot.children.filter {
@@ -94,8 +108,8 @@ class MainActivity : AppCompatActivity() {
                         val text = lastMessage?.child("message")?.getValue(String::class.java) ?: ""
                         val ts = lastMessage?.child("timestamp")?.getValue(Long::class.java) ?: 0L
 
-                        userList.add(ChatPreview(user, text, ts))
-                        adapter.notifyDataSetChanged()
+                        allUsers.add(ChatPreview(user, text, ts))
+                        adapter.updateList(allUsers)
                         checkDone(--remaining)
                     } else {
                         messagesRef.child(chatId2).get().addOnSuccessListener { snapshot2 ->
@@ -107,8 +121,8 @@ class MainActivity : AppCompatActivity() {
                                 val text = lastMessage?.child("message")?.getValue(String::class.java) ?: ""
                                 val ts = lastMessage?.child("timestamp")?.getValue(Long::class.java) ?: 0L
 
-                                userList.add(ChatPreview(user, text, ts))
-                                adapter.notifyDataSetChanged()
+                                allUsers.add(ChatPreview(user, text, ts))
+                                adapter.updateList(allUsers)
                             }
                             checkDone(--remaining)
                         }.addOnFailureListener { checkDone(--remaining) }
@@ -125,6 +139,4 @@ class MainActivity : AppCompatActivity() {
             binding.progressBar.visibility = android.view.View.GONE
         }
     }
-
-
 }
