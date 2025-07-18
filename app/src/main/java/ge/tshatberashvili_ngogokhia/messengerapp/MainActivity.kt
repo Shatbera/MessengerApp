@@ -67,6 +67,8 @@ class MainActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+        binding.root.findViewById<ImageView>(R.id.nav_home).isSelected = true
+
         loadUsersWithLastMessages()
     }
 

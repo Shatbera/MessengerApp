@@ -7,7 +7,6 @@
     android:background="@android:color/white"
     android:padding="24dp">
 
-    <!-- Avatar Image -->
     <ImageView
         android:id="@+id/ivAvatar"
         style="@style/AvatarImage"
@@ -16,7 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Nickname -->
     <EditText
         android:id="@+id/etNickname"
         style="@style/EditTextStyle"
@@ -26,7 +24,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"/>
 
-    <!-- Password -->
     <EditText
         android:id="@+id/etPassword"
         style="@style/EditTextStyle"
@@ -37,7 +34,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
 
-    <!-- Sign In button -->
     <Button
         android:id="@+id/btnLogin"
         style="@style/ButtonSolid"
@@ -47,7 +43,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"/>
 
-    <!-- Bottom container for caption and Sign Up button -->
     <LinearLayout
         android:id="@+id/bottomGroup"
         android:layout_width="wrap_content"

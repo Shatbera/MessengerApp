@@ -44,11 +44,6 @@ class ProfileActivity : AppCompatActivity() {
             openGallery()
         }
 
-        binding.btnSearch.setOnClickListener {
-            val intent = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
-        }
-
         val navHome = findViewById<ImageView>(R.id.nav_home)
 
         navHome.setOnClickListener {
@@ -59,6 +54,8 @@ class ProfileActivity : AppCompatActivity() {
         binding.root.findViewById<ImageView>(R.id.nav_add).setOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
         }
+
+        binding.root.findViewById<ImageView>(R.id.nav_profile).isSelected = true
 
     }
 
